@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="../css/storefront.css" rel="stylesheet">
+    <title>Clothes and Stuff</title>
+</head>
+
+<body>
+    <div class="d-flex justify-content-end mt-4 me-5">
+        <button id="show-cart" class="btn btn-secondary" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+            Show Cart
+        </button>
+    </div>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">Shopping Cart</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <select class="form-select" id="currency-selection" aria-label="Default select example"
+            style="width: 250px; margin-left: 10px;">
+            <option selected value="cad"> Choose your currency</option>
+            <option value="cad">Cad</option>
+            <option value="usd">Usd</option>
+            <option value="eur">Euro</option>
+        </select>
+        <div class="offcanvas-body">
+            <table class="container-fluid">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Item
+                        </th>
+                        <th>
+                            Qty
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <hr>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody id="cart-items"></tbody>
+                <tfoot id="cart-total"></tfoot>
+            </table>
+            <div class="d-flex justify-content-between">
+                <button id="delete-all-cart" class="btn btn-secondary">Empty Cart</button>
+                <button id="checkout-btn" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+                    Checkout </button>
+            </div>
+        </div>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Checkout</h5>
+                        <button id="close-modal" type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="nav nav-pills d-flex justify-content-between" id="modalNav">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="page1-tab" data-bs-toggle="tab" href="#payment">Payment
+                                    Method</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="page2-tab" data-bs-toggle="tab" href="#billing">Billing
+                                    Details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="page3-tab" data-bs-toggle="tab" href="#shipping">Shipping
+                                    Details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="page4-tab" data-bs-toggle="tab" href="#confirmation">Order
+                                    Confirmation</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="modalTabContent">
+                            <div class="tab-pane fade show active" id="payment">
+                                <form id="payment-form">
+                                    <div class="my-3">
+                                        <label for="cardNumber" class="form-label">Card Number</label>
+                                        <input type="number" class="form-control" id="cardNumber"
+                                            placeholder="4444 5555 3333 1111" required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-4">
+                                            <label for="ExpireDate" class="form-label" id="exp-date">Expiration
+                                                Date</label>
+                                            <select id="ExpireDate" class="form-select"
+                                                aria-label="Default select example">
+                                                <option selected value="">MM</option>
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                        </div>
+                                        <div class="mt-2 col-4">
+                                            <label for="ExpireDateYear" class="form-label"></label>
+                                            <select id="ExpireDateYear" class="form-select"
+                                                aria-label="Default select example">
+                                                <option selected value="">YYYY</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2025">2025</option>
+                                                <option value="2026">2026</option>
+                                                <option value="2027">2027</option>
+                                                <option value="2028">2028</option>
+                                                <option value="2029">2029</option>
+                                                <option value="2030">2030</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3 col-4">
+                                            <label for="securityCode" class="form-label" id="sc-code">Security
+                                                Code</label>
+                                            <input type="number" class="form-control" id="securityCode"
+                                                placeholder="123" max="999">
+                                        </div>
+                                        <div id="valid-card"></div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="billing">
+                                <form id="billing-form">
+                                    <div class="row">
+                                        <div class="my-3 col-6">
+                                            <label for="billFName" class="form-label">First Name</label>
+                                            <input type="text" class="form-control" id="billFName" placeholder="John">
+                                        </div>
+                                        <div class="my-3 col-6">
+                                            <label for="billLName" class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" id="billLName" placeholder="Smith">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="billAddress1" class="form-label">Billing Address</label>
+                                        <input type="text" class="form-control" id="billAddress1"
+                                            placeholder="Billing Address">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="billAddress2" class="form-label">Billing Address Line 2</label>
+                                        <input type="text" class="form-control" id="billAddress2"
+                                            placeholder="Billing Address">
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-6">
+                                            <select id="billCountry" class="form-select"
+                                                aria-label="Default select example">
+                                                <option selected value="">Choose Country</option>
+                                                <option value="CA">Canada</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3 col-6">
+                                            <select id="billProvince" class="form-select"
+                                                aria-label="Default select example">
+                                                <option selected value="">Choose Province</option>
+                                                <option value="bc">BC</option>
+                                                <option value="ab">AB</option>
+                                                <option value="sk">SK</option>
+                                                <option value="man">MB</option>
+                                                <option value="qb">QC</option>
+                                                <option value="on">ON</option>
+                                                <option value="ns">NS</option>
+                                                <option value="nb">NB</option>
+                                                <option value="nf">NL</option>
+                                                <option value="pei">PEI</option>
+                                                <option value="nwt">NT</option>
+                                                <option value="nun">NU</option>
+                                                <option value="yuk">YT</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-6">
+                                            <label for="billCity" class="form-label">City</label>
+                                            <input type="text" class="form-control" id="billCity" placeholder="City">
+                                        </div>
+                                        <div class="mb-3 col-6">
+                                            <label for="billPostal" class="form-label">Postal Code</label>
+                                            <input type="text" class="form-control" id="billPostal"
+                                                placeholder="V1V 1V1">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="billPhoneNum" class="form-label">Phone</label>
+                                        <input type="text" class="form-control" id="billPhoneNum"
+                                            placeholder="(250) 555-1234">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="billEmail" class="form-label">Email Address</label>
+                                        <input type="text" class="form-control" id="billEmail"
+                                            placeholder="name@example.com">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="shipping">
+                                <div class="form-check my-2">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                        checked>
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Same as billing address
+                                    </label>
+                                </div>
+                                <form id="shipping-form">
+                                    <div class="row">
+                                        <div class="mb-3 col-6">
+                                            <label for="shipFName" class="form-label">First Name</label>
+                                            <input type="text" class="form-control" id="shipFName" placeholder="John">
+                                        </div>
+                                        <div class="mb-3 col-6">
+                                            <label for="shipLName" class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" id="shipLName" placeholder="Smith">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="shipAddress1" class="form-label">Billing Address</label>
+                                        <input type="text" class="form-control" id="shipAddress1"
+                                            placeholder="Shipping Address">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="shipAddress2" class="form-label">Billing Address Line 2</label>
+                                        <input type="text" class="form-control" id="shipAddress2"
+                                            placeholder="Shipping Address">
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-6">
+                                            <select id="shipCountry" class="form-select"
+                                                aria-label="Default select example">
+                                                <option selected value="">Choose Country</option>
+                                                <option value="canada">Canada</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3 col-6">
+                                            <select id="shipProvince" class="form-select"
+                                                aria-label="Default select example">
+                                                <option selected value="">Choose Province</option>
+                                                <option value="bc">BC</option>
+                                                <option value="ab">AB</option>
+                                                <option value="sk">SK</option>
+                                                <option value="mb">MB</option>
+                                                <option value="qc">QC</option>
+                                                <option value="on">ON</option>
+                                                <option value="ns">NS</option>
+                                                <option value="nb">NB</option>
+                                                <option value="nl">NL</option>
+                                                <option value="pei">PEI</option>
+                                                <option value="nt">NT</option>
+                                                <option value="nu">NU</option>
+                                                <option value="yt">YT</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-6">
+                                            <label for="shipCity" class="form-label">City</label>
+                                            <input type="text" class="form-control" id="shipCity" placeholder="City">
+                                        </div>
+                                        <div class="mb-3 col-6">
+                                            <label for="shipPostal" class="form-label">Postal Code</label>
+                                            <input type="text" class="form-control" id="shipPostal"
+                                                placeholder="V1V 1V1">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cardNumber" class="form-label">Phone</label>
+                                        <input type="text" class="form-control" id="phone2"
+                                            placeholder="(250) 555-1234">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cardNumber" class="form-label">Email Address</label>
+                                        <input type="text" class="form-control" id="email2"
+                                            placeholder="name@example.com">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="confirmation">
+                                <table class="container-fluid">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Item
+                                            </th>
+                                            <th>
+                                                Qty
+                                            </th>
+                                            <th>
+                                                Price
+                                            </th>
+                                            <th>
+                                                Total
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <hr>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="checkout-items"></tbody>
+                                    <tfoot id="checkout-total"></tfoot>
+                                </table>
+                                <div id="error-message" style="color:red;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="back-pg-btn">Back</button>
+                        <button type="button" class="btn btn-primary" id="next-pg-btn">Next Page</button>
+                        <button type="button" class="btn btn-primary" id="checkout-pg-btn">Complete Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="checkout-modal" tabindex="-1" aria-labelledby="checkout-modal-label"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="checkout-modal-label">Thank you for your order!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            id="checkout-complete-x"></button>
+                    </div>
+                    <div class="modal-body" id="checkout-modal-body">
+                        <p>Your order has been successfully processed. You will receive a confirmation email shortly.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            id="checkout-complete">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="store-products" class="px-4 mt-4 row justify-content-center">
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="../scripts/error-checking.js"></script>
+    <script src="../scripts/storefront.js"></script>
+    <script src="../scripts/checkout-modal.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
