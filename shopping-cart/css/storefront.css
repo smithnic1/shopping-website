@@ -1,0 +1,38 @@
+th {
+    padding: 10px;
+}
+
+#offcanvasRight {
+    width: 40%;
+}
+
+.tab-content {
+    position: relative;
+    z-index: 9999;
+  }
+
+  @media (max-width: 1028px) {
+    #offcanvasRight {
+        width: 60%;
+    }
+  }
+  @media (max-width: 850px) {
+    #offcanvasRight {
+        width: 70%;
+    }
+  }
+  @media (max-width: 650px) {
+    #offcanvasRight {
+        width: 90%;
+    }
+  }
+
+  @media (max-width: 440px) {
+    td, #exp-date, #sc-code {
+        font-size: small;
+    }
+  }
+
+  body {
+    background-color: #f8f8f8;
+  }
