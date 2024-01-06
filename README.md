@@ -24,11 +24,6 @@ So go ahead, check it out and let me know what you think. I'm always up for impr
 - Bootstrap
 - Axios
 
-## **Languages**
-- HTML: 52.3%
-- JavaScript: 46.6%
-- CSS: 1.1%
-
 ## **Feedback and Contributions**
 I'm always looking for feedback and contributions to make this shopping website even better. Feel free to reach out or contribute via GitHub.
 
